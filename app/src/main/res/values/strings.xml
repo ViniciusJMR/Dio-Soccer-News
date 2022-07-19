@@ -3,4 +3,12 @@
 
     <string name="title_news">News</string>
     <string name="title_favorites">Favorites</string>
+
+    <string name="txt_open_link">OPEN LINK</string>
+
+    <!-- Description -->
+    <string name="news_image_description">News Image</string>
+    <string name="favorite_news_description">Favorite news</string>
+    <string name="share_news_description">Share news</string>
+
 </resources>
