@@ -18,6 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars"
+            android:src="@color/black"
             android:contentDescription="@string/news_image_description" />
 
         <TextView
@@ -28,7 +29,7 @@
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivNews"
@@ -60,7 +61,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
         <ImageView
-            android:id="@+id/tvFavorite"
+            android:id="@+id/ivFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_margin"
@@ -76,9 +77,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_margin"
-            app:layout_constraintBottom_toBottomOf="@+id/tvFavorite"
+            app:layout_constraintBottom_toBottomOf="@+id/ivFavorite"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvFavorite"
+            app:layout_constraintTop_toTopOf="@+id/ivFavorite"
             app:srcCompat="@drawable/ic_baseline_share_24"
             android:contentDescription="@string/share_news_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
