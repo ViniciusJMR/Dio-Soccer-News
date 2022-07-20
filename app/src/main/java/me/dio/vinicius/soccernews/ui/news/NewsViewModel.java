@@ -3,10 +3,12 @@ package me.dio.vinicius.soccernews.ui.news;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.dio.vinicius.soccernews.data.local.AppDatabase;
 import me.dio.vinicius.soccernews.data.remote.SoccerNewsApi;
 import me.dio.vinicius.soccernews.domain.News;
 import retrofit2.Call;
@@ -19,12 +21,15 @@ public class NewsViewModel extends ViewModel {
 
     private final MutableLiveData<List<News>> news = new MutableLiveData<>();
     private final SoccerNewsApi api;
+
     public NewsViewModel() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://viniciusjmr.github.io/soccer-news-api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(SoccerNewsApi.class);
+
+
         findNews();
     }
 

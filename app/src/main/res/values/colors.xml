@@ -13,4 +13,5 @@
     <color name="pink_600">#ffd81b60</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FF737373</color>
 </resources>
