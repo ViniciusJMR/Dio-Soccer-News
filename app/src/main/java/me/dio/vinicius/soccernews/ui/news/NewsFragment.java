@@ -10,42 +10,55 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import me.dio.vinicius.soccernews.ui.MainActivity;
+import com.google.android.material.snackbar.Snackbar;
+
+import me.dio.vinicius.soccernews.R;
 import me.dio.vinicius.soccernews.databinding.FragmentNewsBinding;
 import me.dio.vinicius.soccernews.ui.adapter.NewsAdapter;
 
 public class NewsFragment extends Fragment {
 
     private FragmentNewsBinding binding;
+    private NewsViewModel viewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NewsViewModel newsViewModel =
-                new ViewModelProvider(this).get(NewsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(NewsViewModel.class);
 
         binding = FragmentNewsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
-        newsViewModel.getNews().observe(getViewLifecycleOwner(), news ->
-            binding.rvNews.setAdapter(new NewsAdapter(news, newsViewModel::saveNews))
-        );
 
-        newsViewModel.getState().observe(getViewLifecycleOwner(), state -> {
-            switch (state){
-                case DOING:
-                    //TODO: Iniciar SwipeRefreshLayout (loading)
-                    break;
-                case DONE:
-                    //TODO: Finalizar SwipeRefreshLayout (loading)
-                    break;
-                case ERROR:
-                    //TODO: Finalizar SwipeRefreshLayout (loading)
-                    //TODO: Mostrar erro genérico
-            }
-        });
+        observeNews();
+
+        observeStates();
+
+        binding.srlNews.setOnRefreshListener(viewModel::findNews);
 
         return root;
+    }
+
+    private void observeStates() {
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            switch (state){
+                case DOING:
+                    binding.srlNews.setRefreshing(true);
+                    break;
+                case DONE:
+                    binding.srlNews.setRefreshing(false);
+                    break;
+                case ERROR:
+                    binding.srlNews.setRefreshing(false);
+                    Snackbar.make(binding.srlNews, R.string.error_network, Snackbar.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void observeNews() {
+        viewModel.getNews().observe(getViewLifecycleOwner(), news ->
+            binding.rvNews.setAdapter(new NewsAdapter(news, viewModel::saveNews))
+        );
     }
 
     @Override

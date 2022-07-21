@@ -2,6 +2,7 @@ package me.dio.vinicius.soccernews.ui.news;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,7 +18,7 @@ import retrofit2.Response;
 public class NewsViewModel extends ViewModel {
 
     public enum State {
-        DOING, DONE, ERROR;
+        DOING, DONE, ERROR
     }
 
 
@@ -29,11 +30,11 @@ public class NewsViewModel extends ViewModel {
         findNews();
     }
 
-    private void findNews() {
+    public void findNews() {
         state.setValue(State.DOING);
         SoccerNewsRepository.getInstance().getRemoteApi().getNews().enqueue(new Callback<List<News>>() {
             @Override
-            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+            public void onResponse(@NonNull Call<List<News>> call, @NonNull Response<List<News>> response) {
                 if (response.isSuccessful()) {
                     news.setValue(response.body());
                     state.setValue(State.DONE);
@@ -44,7 +45,7 @@ public class NewsViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<News>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<News>> call, @NonNull Throwable t) {
                 t.printStackTrace();
                 state.setValue(State.ERROR);
             }

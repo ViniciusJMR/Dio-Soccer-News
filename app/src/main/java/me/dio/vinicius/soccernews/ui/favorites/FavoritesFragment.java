@@ -1,7 +1,6 @@
 package me.dio.vinicius.soccernews.ui.favorites;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import java.util.List;
-
-import me.dio.vinicius.soccernews.ui.MainActivity;
 import me.dio.vinicius.soccernews.databinding.FragmentFavoritesBinding;
-import me.dio.vinicius.soccernews.domain.News;
 import me.dio.vinicius.soccernews.ui.adapter.NewsAdapter;
 
 public class FavoritesFragment extends Fragment {

@@ -3,9 +3,7 @@ package me.dio.vinicius.soccernews.ui.favorites;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.loader.content.AsyncTaskLoader;
 
 import java.util.List;
 
