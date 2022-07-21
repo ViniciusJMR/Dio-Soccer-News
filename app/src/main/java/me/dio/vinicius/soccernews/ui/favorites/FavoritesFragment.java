@@ -1,6 +1,7 @@
 package me.dio.vinicius.soccernews.ui.favorites;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,11 @@ import me.dio.vinicius.soccernews.ui.adapter.NewsAdapter;
 public class FavoritesFragment extends Fragment {
 
     private FragmentFavoritesBinding binding;
+    private FavoritesViewModel viewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        FavoritesViewModel favoritesViewModel =
-                new ViewModelProvider(this).get(FavoritesViewModel.class);
+        viewModel = new ViewModelProvider(this).get(FavoritesViewModel.class);
 
         binding = FragmentFavoritesBinding.inflate(inflater, container, false);
 
@@ -34,17 +35,15 @@ public class FavoritesFragment extends Fragment {
     }
 
     private void loadFavoriteNews() {
-        MainActivity activity = (MainActivity) getActivity();
-
-        if (activity != null) {
-            List<News> favoriteNews = activity.getDb().newsDao().loadFavoriteNews();
+        viewModel.loadFavoriteNews().observe(getViewLifecycleOwner(), localNews -> {
             binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
-            binding.rvNews.setAdapter(new NewsAdapter(favoriteNews, updatedNews -> {
-                activity.getDb().newsDao().save(updatedNews);
+            binding.rvNews.setAdapter(new NewsAdapter(localNews, updatedNews -> {
+                viewModel.saveNews(updatedNews);
                 loadFavoriteNews();
             }));
-        }
+        });
     }
+
 
     @Override
     public void onDestroyView() {

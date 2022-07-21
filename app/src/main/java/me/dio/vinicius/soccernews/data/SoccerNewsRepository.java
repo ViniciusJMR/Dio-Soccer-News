@@ -32,9 +32,7 @@ public class SoccerNewsRepository {
                 .build()
                 .create(SoccerNewsApi.class);
 
-        localDb = Room.databaseBuilder(App.getInstance(), AppDatabase.class, LOCAL_DB_NAME)
-                .allowMainThreadQueries() //FIXME Remover essa gambiarra
-                .build();
+        localDb = Room.databaseBuilder(App.getInstance(), AppDatabase.class, LOCAL_DB_NAME).build();
     }
 
     public static SoccerNewsRepository getInstance() {
