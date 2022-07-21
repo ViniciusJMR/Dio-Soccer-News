@@ -1,6 +1,5 @@
 package me.dio.vinicius.soccernews.ui.news;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.room.Room;
 
-import me.dio.vinicius.soccernews.MainActivity;
-import me.dio.vinicius.soccernews.data.local.AppDatabase;
+import me.dio.vinicius.soccernews.ui.MainActivity;
 import me.dio.vinicius.soccernews.databinding.FragmentNewsBinding;
 import me.dio.vinicius.soccernews.ui.adapter.NewsAdapter;
 
